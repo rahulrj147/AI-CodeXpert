@@ -15,14 +15,17 @@ function App() {
 }`)
 
   const [ review, setReview ] = useState(``)
+  const [loader , setloader] = useState(false);
 
   useEffect(() => {
     prism.highlightAll()
   }, [])
 
   async function reviewCode() {
+    setloader(true);
     const response = await axios.post('https://ai-codexpert-1.onrender.com/ai/get-review', { code })
-    setReview(response.data)
+    setReview(response.data);
+    setloader(false);
   }
 
   return (
@@ -49,13 +52,20 @@ function App() {
             onClick={reviewCode}
             className="review">Review</div>
         </div>
-        <div className="right">
+
+        <div className="right" >{
+          loader ? <div className='spin-Parent'> <span class="spinner"></span> </div>: 
+          <div >
           <Markdown
 
             rehypePlugins={[ rehypeHighlight ]}
 
           >{review}</Markdown>
         </div>
+
+
+           } </div>
+        
       </main>
     </>
   )
