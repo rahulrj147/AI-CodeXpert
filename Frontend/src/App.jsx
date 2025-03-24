@@ -54,7 +54,15 @@ function App() {
         </div>
 
         <div className="right" >{
-          loader ? <div className='spin-Parent'> <span class="spinner"></span> </div>: 
+          loader ?
+          <div className='spin'> 
+            <div className='spin-Parent'> 
+          <span class="spinner"></span>
+          </div>
+          <p >Wait...It may take a while</p>
+          
+           </div>
+          : 
           <div >
           <Markdown
 
